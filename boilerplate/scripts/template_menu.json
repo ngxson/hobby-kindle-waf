@@ -1,0 +1,5 @@
+{
+	"items": [
+		{"name": "APP_NAME", "action": "/mnt/us/extensions/APP_ID/run.sh"}
+	]
+}

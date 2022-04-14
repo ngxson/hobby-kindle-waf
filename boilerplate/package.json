@@ -13,6 +13,7 @@
     "start": "react-scripts start",
     "prebuild": "node scripts/generate-config.js",
     "build": "react-scripts build",
+    "postbuild": "node scripts/bundle-kual-app.js",
     "serve": "serve -s build -l 4000"
   },
   "eslintConfig": {
