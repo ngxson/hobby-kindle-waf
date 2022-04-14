@@ -1,0 +1,7 @@
+node_modules
+.eslintrc.js
+build
+*.lerna_backup
+
+*/debug.js
+*/public/debug.sh

@@ -1,0 +1,33 @@
+{
+  "name": "com.ngxson.waf_demo",
+  "waf_application_name": "WAF Demo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "prestart": "node scripts/generate-config.js",
+    "start": "react-scripts start",
+    "prebuild": "node scripts/generate-config.js",
+    "build": "react-scripts build",
+    "serve": "serve -s build -l 4000"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "ie 7"
+    ],
+    "development": [
+      "ie 7"
+    ]
+  },
+  "homepage": "."
+}

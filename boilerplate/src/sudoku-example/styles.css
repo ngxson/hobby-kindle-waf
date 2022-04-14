@@ -1,0 +1,123 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.board-row:nth-child(3) {
+  border-bottom: 3px solid #669;
+}
+
+.board-row:nth-child(6) {
+  border-bottom: 3px solid #669;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  height: 29px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 29px;
+}
+
+.square.error { 
+  background: #ffb8b8; 
+}
+
+.square:focus {
+  outline: none;
+}
+
+.square:nth-child(3) {
+  border-right: 3px solid #669;
+}
+.square:nth-child(6) {
+  border-right: 3px solid #669;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.square-editable {
+  color: #747474;
+}
+
+.game {
+  display: inline-block;
+}
+
+.game-info {
+  justify-content: center;
+  display: flex;
+  margin-left: 20px;
+}
+
+.game-board {
+  border-block-color:  black;
+  border-collapse: collapse;
+  background-color:  #FFFFFF;
+  border:  #669 solid 2px;
+  /* margin-left: 12px;
+  margin-right: 4px; */
+}
+
+.game-board > div {
+  margin-right: 1px;
+}
+
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24pt;
+  font-weight: bold;
+  line-height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+}
+.game-info {
+  margin-left: 20px;
+}
+
+.game-board {
+  border-block-color:  black;
+  border-collapse: collapse;
+  background-color:  #FFFFFF;
+  border:  #669 solid 2px;
+  margin-left: 12px;
+  margin-right: 4px;
+}

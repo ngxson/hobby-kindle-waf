@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns="http://www.w3.org/ns/widgets"
+  xmlns:kindle="http://kindle.amazon.com/ns/widget-extensions"	
+  id="com.ngxson.waf_demo"
+  version="0.1.0"
+  viewmodes="application">
+  
+  <name>WAF Demo</name>
+  <description>WAF Demo</description>
+  <content src="index.html" />
+
+  <kindle:gestures>
+    <kindle:param name="drag" value="yes"/>
+    <kindle:param name="pinchzoom" value="yes" properties="fire-on-zoom:1"/>
+    <kindle:param name="tap" value="yes"/>
+    <kindle:param name="multi_tap" value="yes"/>
+    <kindle:param name="hold" value="yes"/>
+  </kindle:gestures>
+
+  <kindle:cookiejar>
+    <kindle:asset key="persistent" value="true"/>
+    <kindle:asset key="usePrivateCookies" value="false"/>
+    <kindle:asset key="useDeviceCookies" value="false"/>
+  </kindle:cookiejar>
+
+  <kindle:permissions>
+    <kindle:permission name="download-allowed"/>
+  </kindle:permissions>
+
+  <kindle:network>                                                  
+    <kindle:asset key="user-agent" value="Mozilla/5.0 (X11; U; Linux armv7l like Android; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/533.2+ Kindle/3.0+" />
+    <kindle:asset key="enableWrsProxy" value="true" />        
+    <kindle:asset key="allowTlsFallback" value="true" />
+  </kindle:network>
+
+  <!--
+    features are used to control the JS API that will be available to a
+    waf application.
+  -->
+  <feature name="http://kindle.amazon.com/apis" required="true">
+    <param name="appmgr" value="yes"/>
+    <param name="chrome" value="yes"/>
+    <param name="dconfig" value="yes"/>
+    <param name="dev" value="yes"/>
+    <param name="download" value="yes"/>
+    <param name="drag" value="yes"/>
+    <param name="gestures" value="yes"/>
+    <param name="hold" value="yes"/>
+    <param name="messaging" value="yes"/>
+    <param name="multi_tap" value="yes"/>
+    <param name="net" value="yes"/>
+    <param name="pinchzoom" value="yes"/>
+    <param name="swipe" value="yes"/>
+    <param name="tap" value="yes"/>
+    <param name="todo" value="yes"/>
+    <param name="viewport" value="yes"/>
+  </feature>
+
+</widget>
+

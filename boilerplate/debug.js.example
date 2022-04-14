@@ -1,0 +1,20 @@
+/**
+ * A production WAF will read HTML/JS/CSS files directly on your Kindle.
+ * However, imagine each time you want to change something, you will need to build, then copy the app to your Kindle
+ * 
+ * This module allows connecting Kindle to ReactJS dev server running on a computer
+ * Condition: both Kindle and the computer are on the same network
+ * 
+ * Usage:
+ * 1. Copy this file (debug.js.example) to "debug.js"
+ * 2. Change the IP below to your computer
+ * 3. Run (or re-run) "npm start"
+ * 4. On kindle, run:
+ *    curl http://{YOU_COMPUTER_IP}:3000/debug.sh | sh
+ * 5. Then run:
+ *    lipc-set-prop com.lab126.appmgrd start app://com.your_app_id
+ */
+
+DEBUG_PARAMS = {
+  LOCAL_COMPUTER_IP: '192.168.1.100',
+};
