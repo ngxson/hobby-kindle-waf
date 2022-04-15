@@ -4,6 +4,9 @@ Building applications for Kindle has never been that easy. Now with ReactJS, you
 
 **NOTICE: Kindle firmware 5.12 and up is required**
 
+<img src="https://raw.githubusercontent.com/ngxson/hobby-kindle-waf/master/assets/1650011518.png" width="40%">
+<img src="https://raw.githubusercontent.com/ngxson/hobby-kindle-waf/master/assets/1650011534.png" width="40%">
+
 # Get started
 
 Assume that you've already familiar with ReactJS.
