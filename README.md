@@ -6,6 +6,8 @@ In the past, people used to build Kindle booklets on Java. This is complicated b
 
 To get started, see [boilerplate](boilerplate)
 
+Download KUAL extension file for this demo: [Go to release](https://github.com/ngxson/hobby-kindle-waf/releases)
+
 <p float="left">
   <img src="https://raw.githubusercontent.com/ngxson/hobby-kindle-waf/master/assets/1650011518.png" width="40%">
   <img src="https://raw.githubusercontent.com/ngxson/hobby-kindle-waf/master/assets/1650011534.png" width="40%">
