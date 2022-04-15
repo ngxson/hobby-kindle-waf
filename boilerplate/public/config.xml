@@ -16,12 +16,18 @@
     <kindle:param name="tap" value="yes"/>
     <kindle:param name="multi_tap" value="yes"/>
     <kindle:param name="hold" value="yes"/>
+    <kindle:param name="swipe" value="yes"/>
   </kindle:gestures>
 
+  <kindle:chrome>
+    <kindle:asset key="configureSearchBar" value="system" />
+  </kindle:chrome>
+
   <kindle:cookiejar>
-    <kindle:asset key="persistent" value="true"/>
-    <kindle:asset key="usePrivateCookies" value="false"/>
-    <kindle:asset key="useDeviceCookies" value="false"/>
+    <kindle:asset key="persistent" value="true" />
+    <kindle:asset key="usePrivateCookies" value="false" />
+    <kindle:asset key="useDeviceCookies" value="true" />
+    <kindle:asset key="useAccessToken" value="true" />
   </kindle:cookiejar>
 
   <kindle:permissions>
@@ -43,6 +49,7 @@
     <param name="chrome" value="yes"/>
     <param name="dconfig" value="yes"/>
     <param name="dev" value="yes"/>
+    <param name="device" value="yes"/>
     <param name="download" value="yes"/>
     <param name="drag" value="yes"/>
     <param name="gestures" value="yes"/>
@@ -55,6 +62,8 @@
     <param name="tap" value="yes"/>
     <param name="todo" value="yes"/>
     <param name="viewport" value="yes"/>
+    <param name="popup" value="yes"/>
+    <param name="filesystem" value="yes"/>
   </feature>
 
 </widget>

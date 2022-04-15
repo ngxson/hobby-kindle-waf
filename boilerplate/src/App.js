@@ -1,9 +1,9 @@
-import SudokuExample from './sudoku-example/SudokuExample';
+import Example from './example/Example';
 
 function App() {
   return (
     <div>
-      <SudokuExample />
+      <Example />
     </div>
   );
 }
