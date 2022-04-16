@@ -1,9 +1,9 @@
-import Example from './example/Example';
+import Game from "./components/Game";
 
 function App() {
   return (
     <div>
-      <Example />
+      <Game />
     </div>
   );
 }

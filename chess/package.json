@@ -1,11 +1,12 @@
 {
-  "name": "com.ngxson.waf_demo",
-  "waf_application_name": "WAF Demo",
+  "name": "com.ngxson.chess",
+  "waf_application_name": "WAF Chess Game",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chess.js": "^0.13.1",
+    "memoizee": "^0.4.15",
     "react": "^18.0.0",
-    "react-chessboard": "^1.2.2",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1"
   },

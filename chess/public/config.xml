@@ -2,12 +2,12 @@
 
 <widget xmlns="http://www.w3.org/ns/widgets"
   xmlns:kindle="http://kindle.amazon.com/ns/widget-extensions"	
-  id="com.ngxson.waf_demo"
+  id="com.ngxson.chess"
   version="0.1.0"
   viewmodes="application">
   
-  <name>WAF Demo</name>
-  <description>WAF Demo</description>
+  <name>WAF Chess Game</name>
+  <description>WAF Chess Game</description>
   <content src="index.html" />
 
   <kindle:gestures>
