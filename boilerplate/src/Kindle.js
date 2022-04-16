@@ -11,6 +11,7 @@ export const viewportHeight = Math.max(document.documentElement.clientHeight || 
 const allowedGestures = ['onswipe', 'onzoom', 'onpinch'];
 const gestureCallbacks = {};
 const addGestureCallback = (action, callback) => {
+  if (!window.kindleAPI) return false;
   if (allowedGestures.indexOf(action) === -1) return false;
   if (!gestureCallbacks[action]) {
     gestureCallbacks[action] = [];
