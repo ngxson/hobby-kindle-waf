@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kindle WAF ReactJS</title>
+    <script src="./lib/polyfill.min.js"></script>
+    <script src="./lib/jquery.js"></script>
+    <script src="./lib/jquery.tmpl.js"></script>
+    <script src="./lib/kindle-chrome.js"></script>
+    <script>
+      window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+        alert(errorMsg);
+        return false;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      try {
+        window.kindleAPI = kindle;
+      } catch (e) {
+        // ignored
+      }
+    </script>
+  </body>
+</html>

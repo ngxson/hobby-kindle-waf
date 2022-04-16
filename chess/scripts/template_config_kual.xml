@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension>
+  <information>
+    <name>APP_NAME</name>
+    <version>APP_VERSION</version>
+    <author>APP_NAME</author>
+    <id>APP_ID</id>
+  </information>
+  <menus>
+    <menu type="json" dynamic="true">menu.json</menu>
+  </menus>
+</extension>
