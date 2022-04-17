@@ -4,10 +4,12 @@ import decode from '../decode';
 class ChessEngine {
   constructor (initState) {
     this.game = new Chess(initState);
+    this.turn = 'w';
   }
 
   move(m) {
     this.game.move(m);
+    this.turn = this.turn === 'w' ? 'b' : 'w';
   }
 
   getPossibleMoves(x, y) {
@@ -33,6 +35,10 @@ class ChessEngine {
       }
     }
     return pieces;
+  }
+
+  getCurrentTurn() {
+    return this.turn;
   }
 }
 

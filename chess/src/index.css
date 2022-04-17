@@ -25,3 +25,12 @@
 .tile.piece {
   text-align: center;
 }
+
+
+
+.controls .turn {
+  display: inline-block;
+  height: 50px;
+  width: 140px;
+  border: 2px solid black;
+}

@@ -7,6 +7,7 @@ import Labels from './Labels';
 import Clickable from './Clickable';
 import Board from './Board';
 import memoizee from 'memoizee';
+import Controls from './Controls';
 
 function Game() {
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -99,6 +100,7 @@ function Game() {
       <Labels />
       {_pieces}
       {_clickTargets}
+      <Controls engine={engine} />
     </div>
   );
 }

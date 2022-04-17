@@ -1,6 +1,5 @@
 import React from 'react';
-import memoizee from 'memoizee';
-import { tileStyleBase, getTileClass } from './dimensions';
+import { tileStyleBase, getTileClass, controlPaddingTop } from './dimensions';
 
 function Tile({x, y}) {
   const odd = x % 2;
@@ -27,6 +26,8 @@ function Board() {
       tiles.push(<Tile key={cssClassName} x={x} y={y} />);
     }
   }
+
+  tileStyles += `.controls {top:${controlPaddingTop}px; text-align:center; position:absolute; width:95%; font-size:40px}`
 
   return <>
     <style jsx="true" global="true">
