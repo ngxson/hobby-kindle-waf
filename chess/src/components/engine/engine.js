@@ -24,9 +24,12 @@ class ChessEngine {
     for (const line of b) {
       for (const cell of line) {
         if (!cell) continue;
-        pieces.push(decode.fromPieceDecl(`${
-          cell.color === 'w' ? cell.type.toUpperCase() : cell.type
-        }@${cell.square}`))
+        pieces.push({
+          x: decode.getXFromSquare(cell.square),
+          y: decode.getYFromSquare(cell.square),
+          square: cell.square,
+          piece: cell.color === 'w' ? cell.type.toUpperCase() : cell.type,
+        });
       }
     }
     return pieces;

@@ -1,22 +1,23 @@
-import memoizee from 'memoizee';
-import { cellWidth, paddingRight } from './dimensions';
+import React from 'react';
+import { cellWidth, paddingRight, paddingTop } from './dimensions';
 
 const alpha = 'abcdefgh';
 const num = '12345678';
 
-const Labels = memoizee(() => {
+const Labels = () => {
   const labels = [];
   const paddingBottomRight = 25;
   
   const addLabel = (x, y, key) => {
     const styles = {
+      fontSize: '16px',
       position: 'absolute',
       left: x === null
         ? `${paddingRight}px`
         : `${paddingRight + cellWidth * (x + 1) - paddingBottomRight}px`,
       top: x === null
-        ? `${(7-(y || 0)) * cellWidth}px`
-        : `${8 * cellWidth - paddingBottomRight}px`,
+        ? `${paddingTop + (7-(y || 0)) * cellWidth}px`
+        : `${paddingTop + 8 * cellWidth - paddingBottomRight}px`,
     };
     labels.push(<div style={styles} key={key}>
       {x !== null ? alpha[x] : ''}
@@ -32,6 +33,6 @@ const Labels = memoizee(() => {
   }
 
   return <>{labels}</>;
-});
+};
 
-export default Labels;
+export default React.memo(Labels);

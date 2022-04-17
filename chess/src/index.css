@@ -1,0 +1,27 @@
+.tile {
+  position: absolute;
+}
+
+.tile.dark {
+  background: #ccc;
+}
+
+.tile.light {
+  background: #fff;
+}
+
+.tile.black {
+  background: #777;
+}
+
+.tile.border-thick {
+  box-shadow: inset 0px 0px 0px 5px #000;
+}
+
+.tile.border-normal {
+  box-shadow: inset 0px 0px 0px 5px #ccc;
+}
+
+.tile.piece {
+  text-align: center;
+}

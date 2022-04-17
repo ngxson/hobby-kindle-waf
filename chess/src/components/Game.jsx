@@ -1,49 +1,50 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import decode from './decode';
-import { cellWidth, paddingRight } from './dimensions';
+import { getTileClass } from './dimensions';
 import pieceComponents from './pieces';
-import memoizee from 'memoizee';
 import ChessEngine from './engine/engine';
 import Labels from './Labels';
 import Clickable from './Clickable';
-
-const tileStyleBase = memoizee((x, y) => ({
-  position: 'absolute',
-  left: `${paddingRight + cellWidth * x}px`,
-  top: `${(7-y) * cellWidth}px`,
-  width: `${cellWidth}px`,
-  height: `${cellWidth}px`,
-}));
-const tileStyleSpec = memoizee((light, selected, possibleMove) => ({
-  background: possibleMove ? '#777' : (light ? '#fff' : '#ccc'),
-  boxShadow: selected
-    ? 'inset 0px 0px 0px 5px #000'
-    : (possibleMove ? 'inset 0px 0px 0px 5px #ccc' : 'none'),
-}));
+import Board from './Board';
+import memoizee from 'memoizee';
 
 function Game() {
   const [selectedPiece, setSelectedPiece] = useState(null);
   const [engine, setEngine] = useState();
+  const selectedPieceRef = useRef();
+  const engineRef = useRef();
 
   useEffect(() => {
-    setEngine(new ChessEngine());
+    const engine = new ChessEngine();
+    setEngine(engine);
+    engineRef.current = engine;
   }, []);
 
   if (!engine) return null;
 
-  const onTileClicked = (x, y) => () => {
+  const onTileClicked = (x, y) => memoizee(() => {
+    const selectedPiece = selectedPieceRef.current;
+    const engine = engineRef.current;
     if (!selectedPiece) {
       // select a new piece
       const moves = engine.getPossibleMoves(x, y);
-      if (!moves) return;
-      setSelectedPiece({x, y, moves});
+      if (!moves || !moves.length) return;
+      const s = {x, y, moves: moves.map(m => {
+        const sq = m.slice(-2);
+        return {
+          x: decode.getXFromSquare(sq),
+          y: decode.getYFromSquare(sq),
+          m,
+        };
+      })};
+      setSelectedPiece(s);
+      selectedPieceRef.current = s;
       return;
     }
 
     let possibleMove;
-    const selectedSquare = decode.xyToDecl(x, y);
-    for (const m of selectedPiece.moves) {
-      if (m.endsWith(selectedSquare)) {
+    for (const {x: x0, y: y0, m} of selectedPiece.moves) {
+      if (x === x0 && y === y0) {
         possibleMove = m;
         break;
       }
@@ -53,12 +54,14 @@ function Game() {
       engine.move(possibleMove);
       setTimeout(() => {
         setSelectedPiece(null);
-      }, 10);
+        selectedPieceRef.current = null;
+      }, 1);
     } else {
       // deselect
       setSelectedPiece(null);
+      selectedPieceRef.current = null;
     }
-  };
+  });
 
   const pieces = engine.getAllPieces();
   const _pieces = pieces.map((decl) => {
@@ -72,38 +75,27 @@ function Game() {
     return <Clickable key={i} x={x} y={y} onClick={onTileClicked(x, y)} />;
   });
 
-  const _tiles = [];
-  const possibleMoves = selectedPiece ? selectedPiece.moves.map(m => m.slice(-2)) : [];
-  for (let y = 0; y < 8; y++) {
-    for (let x = 0; x < 8; x++) {
-      const square = decode.xyToDecl(x, y);
-      let selected, isPossibleMove;
-      if (selectedPiece) {
-        selected = selectedPiece.x === x && selectedPiece.y === y;
-        isPossibleMove = possibleMoves.indexOf(square) !== -1;
-      }
-      if (isPossibleMove) {
-        const k = _clickTargets.length;
-        _clickTargets.push(
-          <Clickable key={k} x={x} y={y} onClick={onTileClicked(x, y)} />
-        );
-      }
-      const odd = x % 2;
-      const light = y % 2 ? !odd : !!odd;
-      const styles = {
-        ...tileStyleBase(x, y),
-        ...tileStyleSpec(light, selected, isPossibleMove),
-      }
-      _tiles.push(<div
-        style={styles}
-        key={`${x}${y}`}
-      />);
-    }
+  const _tileOverlay = selectedPiece
+    ? selectedPiece.moves.map(({x, y}) => {
+      const className = getTileClass(x, y);
+      return <React.Fragment key={className}>
+        <div className={className + 'black border-normal'}></div>
+        <Clickable x={x} y={y} onClick={onTileClicked(x, y)} />
+      </React.Fragment>
+    })
+    : null;
+  
+  if (selectedPiece) {
+    const {x, y} = selectedPiece;
+    _tileOverlay.push(<React.Fragment key="selected">
+      <div className={getTileClass(x, y) + 'border-thick'}></div>
+    </React.Fragment>);
   }
 
   return (
     <div>
-      {_tiles}
+      <Board />
+      {_tileOverlay}
       <Labels />
       {_pieces}
       {_clickTargets}
