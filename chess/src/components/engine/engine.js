@@ -1,22 +1,23 @@
 import { Chess } from 'chess.js';
 import decode from '../decode';
-
-const jsChessEngine = require('js-chess-engine');
-const { aiMove } = jsChessEngine;
+import { aiMove } from './ai/js-chess-engine';
 
 class ChessEngine {
-  constructor (initState) {
-    this.game = new Chess(initState);
-    this.aiLevel = 2;
-    this.aiEnable = true;
-    this.turn = 'w';
+  constructor () {
+    this.loadState();
     window.currentChessEngine = this;
   }
 
   move(m) {
-    this.game.move(m);
-    this.turn = this.turn === 'w' ? 'b' : 'w';
-    this.aiMove();
+    return new Promise(resolve => {
+      this.game.move(m);
+      this.turn = this.turn === 'w' ? 'b' : 'w';
+      if (this.aiEnable) {
+        this.aiMove();
+      }
+      this.saveState();
+      resolve();
+    });
   }
 
   aiMove() {
@@ -56,6 +57,41 @@ class ChessEngine {
 
   getCurrentTurn() {
     return this.turn;
+  }
+
+  isGameOver() {
+    return this.game.game_over();
+  }
+
+  saveState() {
+    localStorage.setItem('chessAI', JSON.stringify({
+      enable: this.aiEnable,
+      level: this.aiLevel,
+    }));
+    localStorage.setItem('chessFEN', this.game.fen());
+  }
+
+  loadState() {
+    const savedAI = localStorage.getItem('chessAI');
+    const savedFEN = localStorage.getItem('chessFEN');
+
+    if (savedAI) {
+      const json = JSON.parse(savedAI);
+      this.aiEnable = json.enable;
+      this.aiLevel = json.level;
+    } else {
+      this.aiEnable = false;
+      this.aiLevel = 2;
+    }
+
+    if (savedFEN) {
+      const tmp = savedFEN.split(' ');
+      this.game = new Chess(savedFEN);
+      this.turn = tmp[tmp.length - 5];
+    } else {
+      this.game = new Chess();
+      this.turn = 'w';
+    }
   }
 }
 

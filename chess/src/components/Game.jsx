@@ -8,13 +8,18 @@ import Clickable from './Clickable';
 import Board from './Board';
 import memoizee from 'memoizee';
 import Controls from './Controls';
+import { MessageDialog } from './Dialog';
+
+const delay = ms => new Promise(r => setTimeout(r, ms));
 
 function Game() {
   const [selectedPiece, setSelectedPiece] = useState(null);
+  const [isAIThinking, setIsAIThinking] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
   const selectedPieceRef = useRef();
   const engine = getEngine();
 
-  const onTileClicked = (x, y) => memoizee(() => {
+  const onTileClicked = (x, y) => memoizee(async () => {
     const selectedPiece = selectedPieceRef.current;
     const engine = getEngine();
     if (!selectedPiece) {
@@ -43,11 +48,16 @@ function Game() {
     }
 
     if (possibleMove) {
-      engine.move(possibleMove);
-      setTimeout(() => {
-        setSelectedPiece(null);
-        selectedPieceRef.current = null;
-      }, 1);
+      // select a move
+      if (engine.aiEnable) setIsAIThinking(true);
+      if (engine.aiEnable) await delay(200);
+      await engine.move(possibleMove);
+      if (engine.aiEnable) setIsAIThinking(false);
+      setSelectedPiece(null);
+      selectedPieceRef.current = null;
+      if (engine.isGameOver()) {
+        setIsGameOver(true);
+      }
     } else {
       // deselect
       setSelectedPiece(null);
@@ -91,6 +101,12 @@ function Game() {
       <Labels />
       {_pieces}
       {_clickTargets}
+      {isAIThinking && <MessageDialog>
+        Machine is thinking...
+      </MessageDialog>}
+      {isGameOver && <MessageDialog>
+        Win / Game Over
+      </MessageDialog>}
       <Controls engine={engine} />
     </div>
   );
