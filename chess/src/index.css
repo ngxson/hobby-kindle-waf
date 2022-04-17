@@ -27,6 +27,11 @@
 }
 
 
+.clickable {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+}
+
 
 .controls .turn {
   display: inline-block;

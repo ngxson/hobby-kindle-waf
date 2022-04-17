@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import decode from './decode';
 import { getTileClass } from './dimensions';
 import pieceComponents from './pieces';
-import ChessEngine from './engine/engine';
+import { getEngine } from './engine/engine';
 import Labels from './Labels';
 import Clickable from './Clickable';
 import Board from './Board';
@@ -11,21 +11,12 @@ import Controls from './Controls';
 
 function Game() {
   const [selectedPiece, setSelectedPiece] = useState(null);
-  const [engine, setEngine] = useState();
   const selectedPieceRef = useRef();
-  const engineRef = useRef();
-
-  useEffect(() => {
-    const engine = new ChessEngine();
-    setEngine(engine);
-    engineRef.current = engine;
-  }, []);
-
-  if (!engine) return null;
+  const engine = getEngine();
 
   const onTileClicked = (x, y) => memoizee(() => {
     const selectedPiece = selectedPieceRef.current;
-    const engine = engineRef.current;
+    const engine = getEngine();
     if (!selectedPiece) {
       // select a new piece
       const moves = engine.getPossibleMoves(x, y);

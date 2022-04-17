@@ -1,14 +1,31 @@
 import { Chess } from 'chess.js';
 import decode from '../decode';
 
+const jsChessEngine = require('js-chess-engine');
+const { aiMove } = jsChessEngine;
+
 class ChessEngine {
   constructor (initState) {
     this.game = new Chess(initState);
+    this.aiLevel = 2;
+    this.aiEnable = true;
     this.turn = 'w';
+    window.currentChessEngine = this;
   }
 
   move(m) {
     this.game.move(m);
+    this.turn = this.turn === 'w' ? 'b' : 'w';
+    this.aiMove();
+  }
+
+  aiMove() {
+    if (this.turn === 'w') return;
+    const moves = Object.entries(aiMove(this.game.fen()));
+    if (!moves.length) return;
+    const move = moves[0].map(m => m.toLowerCase());
+    console.log({from: move[0], to: move[1]})
+    this.game.move({from: move[0], to: move[1]});
     this.turn = this.turn === 'w' ? 'b' : 'w';
   }
 
@@ -41,5 +58,13 @@ class ChessEngine {
     return this.turn;
   }
 }
+
+export const getEngine = () => {
+  if (!window.currentChessEngine) {
+    return new ChessEngine();
+  } else {
+    return window.currentChessEngine;
+  }
+};
 
 export default ChessEngine;

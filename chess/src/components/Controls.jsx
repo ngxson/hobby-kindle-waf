@@ -1,5 +1,7 @@
-function Controls({engine}) {
-  const turnIsWhite = engine.getCurrentTurn() === 'w';
+import { getEngine } from './engine/engine';
+
+function Controls() {
+  const turnIsWhite = getEngine().getCurrentTurn() === 'w';
   const turnBg = turnIsWhite ? '#fff' : '#000';
   const turnColor = turnIsWhite ? '#000' : '#fff';
   const turnTxt = turnIsWhite ? 'White' : 'Black';
