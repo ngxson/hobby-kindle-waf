@@ -2,10 +2,29 @@ import { Chess } from 'chess.js';
 import decode from '../decode';
 import { aiMove } from './ai/js-chess-engine';
 
+const levels = ['very easy', 'easy', 'normal', 'hard'];
+
 class ChessEngine {
   constructor () {
     this.loadState();
     window.currentChessEngine = this;
+  }
+
+  newGame(level) {
+    this.aiEnable = level >= 0;
+    this.aiLevel = this.aiEnable ? level : 2;
+    this.game = new Chess();
+    this.turn = 'w';
+    this.saveState();
+    if (window.onNewGame) {
+      window.onNewGame();
+    }
+  }
+
+  getGameModeStr = () => {
+    return this.aiEnable
+      ? `AI (${levels[this.aiLevel]})`
+      : 'Human';
   }
 
   move(m) {
@@ -13,10 +32,15 @@ class ChessEngine {
       this.game.move(m);
       this.turn = this.turn === 'w' ? 'b' : 'w';
       if (this.aiEnable) {
-        this.aiMove();
+        setTimeout(() => {
+          this.aiMove();
+          this.saveState();
+          resolve();
+        }, 100);
+      } else {
+        this.saveState();
+        resolve();
       }
-      this.saveState();
-      resolve();
     });
   }
 

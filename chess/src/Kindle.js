@@ -192,10 +192,10 @@ export const KindleAPI = {
      * Equals to lipc-set-prop handler ev message
      * @param {String} handler 
      * @param {String} ev 
-     * @param {String} message 
+     * @param {Object} data any Object (will be JSON-ify by mesquite itself)
      * @returns 
      */
-    sendMessage: (handler, ev, message) => window.kindleAPI.messaging.sendMessage(handler, ev, message),
+    sendMessage: (handler, ev, data) => window.kindleAPI.messaging.sendMessage(handler, ev, data),
     /**
      * Equals to lipc-set-prop handler ev message
      * @param {String} handler 
@@ -205,7 +205,9 @@ export const KindleAPI = {
      */
     sendStringMessage: (handler, ev, message) => window.kindleAPI.messaging.sendStringMessage(handler, ev, message),
     /**
-     * Equals to lipc-get-prop
+     * Register lipc prop write event
+     * Can be triggered by running lipc-set-prop APP_ID ev '{"data": "test"}'
+     * (APP_ID is "name" in package.json)
      * @param {String} ev 
      * @param {Function} callback 
      * @returns 

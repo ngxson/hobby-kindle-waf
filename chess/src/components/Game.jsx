@@ -16,8 +16,16 @@ function Game() {
   const [selectedPiece, setSelectedPiece] = useState(null);
   const [isAIThinking, setIsAIThinking] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  const rerender = useState(0)[1];
   const selectedPieceRef = useRef();
   const engine = getEngine();
+
+  window.onNewGame = () => {
+    setSelectedPiece(null);
+    setIsAIThinking(false);
+    setIsGameOver(false);
+    rerender(Date.now());
+  };
 
   const onTileClicked = (x, y) => memoizee(async () => {
     const selectedPiece = selectedPieceRef.current;
@@ -105,7 +113,8 @@ function Game() {
         Machine is thinking...
       </MessageDialog>}
       {isGameOver && <MessageDialog>
-        Win / Game Over
+        Win / Game Over<br/><br/>
+        <button onClick={window.chessOpenMenu()}>New Game</button>
       </MessageDialog>}
       <Controls engine={engine} />
     </div>
