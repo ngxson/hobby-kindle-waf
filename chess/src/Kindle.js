@@ -186,5 +186,30 @@ export const KindleAPI = {
      * @param {*} speed between 0.0 and 1.0. For example: 0.5 => each swipe scroll 1/2 screen
      */
     setScrollSpeed: (speed) => window.scrollSpeed = speed,
+  },
+  messaging: {
+    /**
+     * Equals to lipc-set-prop handler ev message
+     * @param {String} handler 
+     * @param {String} ev 
+     * @param {String} message 
+     * @returns 
+     */
+    sendMessage: (handler, ev, message) => window.kindleAPI.messaging.sendMessage(handler, ev, message),
+    /**
+     * Equals to lipc-set-prop handler ev message
+     * @param {String} handler 
+     * @param {String} ev 
+     * @param {String} message 
+     * @returns 
+     */
+    sendStringMessage: (handler, ev, message) => window.kindleAPI.messaging.sendStringMessage(handler, ev, message),
+    /**
+     * Equals to lipc-get-prop
+     * @param {String} ev 
+     * @param {Function} callback 
+     * @returns 
+     */
+    receiveMessage: (ev, callback) => window.kindleAPI.messaging.receiveMessage(ev, callback),
   }
 };

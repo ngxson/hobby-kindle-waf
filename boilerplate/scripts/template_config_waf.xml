@@ -19,6 +19,13 @@
     <kindle:param name="swipe" value="yes"/>
   </kindle:gestures>
 
+  <kindle:messaging>
+    <kindle:app name="com.lab126.chromebar" value="yes" />
+    <kindle:app name="com.lab126.pillow" value="yes" />
+    <kindle:app name="com.lab126.appmgrd" value="yes" />
+    <kindle:app name="APP_ID" value="yes" />
+  </kindle:messaging>
+
   <kindle:chrome>
     <kindle:asset key="configureSearchBar" value="system" />
   </kindle:chrome>
